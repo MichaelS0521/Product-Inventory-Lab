@@ -4,6 +4,8 @@ import models.Sneaker;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Scanner;
 
 public class SneakerService {
     private static int nextId = 1;  // (1)
@@ -20,5 +22,39 @@ public class SneakerService {
 
         // (4)
         return createdSneaker;
+    }
+
+    //read
+    // should take an int and return an object with that id, if exists
+    public Sneaker findSneaker(int id) {
+        for (Sneaker sneaker : inventory) {
+            if (sneaker.getId() == id) {
+                return sneaker;
+            }
+        }
+        return null;
+    }
+
+    //read all
+    public Sneaker[] findAll() {
+        // should return a basic array copy of the ArrayList
+        Sneaker[] sneakerArray = new Sneaker[inventory.size()];
+
+        sneakerArray = inventory.toArray(sneakerArray);
+
+        return sneakerArray;
+    }
+
+    //delete
+    public boolean delete(int id) {
+        // should remove the object with this id from the ArrayList if exits and return true.
+        // Otherwise return false
+        for (Sneaker sneaker : inventory) {
+            if (sneaker.getId() == id) {
+                inventory.remove(id);
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -28,6 +28,10 @@ public class Sneaker {
         this.price = price;
     }
 
+    public Sneaker() {
+
+    }
+
     public void setName(String name) {
         this.name = name;
     }

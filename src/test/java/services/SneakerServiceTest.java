@@ -1,13 +1,24 @@
 package services;
 
 import models.Sneaker;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
+
 
 public class SneakerServiceTest {
+    private SneakerService inventory;
+
+    @Before
+    public void setUp() {
+
+        inventory = new SneakerService();
+        inventory.create("Nike Air Max", "Nike", "Running", 10.5, 5, 120.0f);
+        inventory.create("Adidas Superstar", "Adidas", "Casual", 9.0, 3, 80.0f);
+        inventory.create("Reebok Classic", "Reebok", "Lifestyle", 11.0, 8, 90.0f);
+    }
 
     @Test
     public void createTest(){
@@ -44,13 +55,25 @@ public class SneakerServiceTest {
     }
 
     @Test
-    public void findTest() {
-        List<Sneaker> inventory = new ArrayList<>();
-        inventory.add(SneakerService.create("AirMax", "Nike", "Baseball", 10.5, 10, 99.99f));
-        inventory.add(SneakerService.create("Tracks", "Adidas", "Track & Field", 11.5, 10, 79.99f));
-        inventory.add(SneakerService.create("Extremes", "Nike", "Basketball", 11.0, 10, 100.99f));
+    public void findSneakerTest() {
+        Sneaker sneakerFound = inventory.findSneaker(2);
+        Assertions.assertEquals(2, sneakerFound.getId());
+    }
 
-        
+    @Test
+    public void findAll() {
+        Sneaker[] sneakers = inventory.findAll();
+
+        Assertions.assertEquals(3, sneakers.length);
+    }
+
+    @Test
+    public void delete() {
+        boolean removedSneaker = inventory.delete(2);
+        Sneaker[] sneakers = inventory.findAll();
+
+        Assertions.assertEquals(2, sneakers.length);
+        Assertions.assertTrue(removedSneaker);
     }
 }
 
