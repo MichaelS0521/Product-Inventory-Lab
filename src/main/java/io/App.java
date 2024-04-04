@@ -18,7 +18,7 @@ public class App {
 
     private void init() {
         while (true) {
-            String userInput = Console.getStringInput("What would you like to do today?").toLowerCase();
+            String userInput = Console.getStringInput("Input command:\n[-create] [-update] [-find] [-inv] [-remove] [-stop]").toLowerCase();
             if (userInput.equals("-create")) {
                 Console.print("You picked Creating a Sneaker, Please input the following:");
                 Console.createSneakerInput();

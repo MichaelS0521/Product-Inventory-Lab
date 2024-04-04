@@ -22,9 +22,9 @@ public class Console {
     }
 
     public static String getStringInput(String prompt) {
-        print(prompt);
+        println(prompt);
 
-        return scan.nextLine();
+        return scan.next();
     }
 
     public static int getIntInput(String prompt) {
