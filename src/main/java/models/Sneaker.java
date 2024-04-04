@@ -60,8 +60,11 @@ public class Sneaker {
         return price;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public double getSize() {
+        return size;
+    }
+
+    public void setId(int id) { this.id = id;
     }
 
     public void setBrand(String brand) {
@@ -84,11 +87,17 @@ public class Sneaker {
         this.price = price;
     }
 
-    public double getSize() {
-        return size;
+    @Override
+    public String toString() {
+        return "\n********************\n" +
+                "ID: [" + id +
+                "]\nName: " + name +
+                "\nBrand: " + brand +
+                "\nSport: " + sport +
+                "\nSize: " + size +
+                "\nQuantity: " + qty +
+                "\nPrice: $" + price +
+                "\n********************\n";
     }
 
-    public int getQuantity() {
-        return qty;
-    }
 }

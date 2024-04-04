@@ -1,32 +1,38 @@
 package services;
 
+import io.Console;
 import models.Sneaker;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.Scanner;
 
 public class SneakerService {
     private static int nextId = 1;  // (1)
 
-    private static List<Sneaker> inventory = new ArrayList<>();
+    private static final List<Sneaker> inventory = new ArrayList<>();
 
     public static Sneaker create(String name, String brand, String sport, double size, int quantity, float price) {
 
+        for (Sneaker exsistingSneaker : inventory) {
+            if (exsistingSneaker.getId() == nextId) {
+                nextId++;
+            }
+        }
+
         // (2)
-        Sneaker createdSneaker = new Sneaker(nextId++, name, brand, sport, size, quantity, price);
+        Sneaker createdSneaker = new Sneaker(nextId, name, brand, sport, size, quantity, price);
 
         // (3)
         inventory.add(createdSneaker);
 
+        nextId++;
         // (4)
         return createdSneaker;
     }
 
     //read
     // should take an int and return an object with that id, if exists
-    public Sneaker findSneaker(int id) {
+    public static Sneaker findSneaker(int id) {
         for (Sneaker sneaker : inventory) {
             if (sneaker.getId() == id) {
                 return sneaker;
@@ -36,7 +42,7 @@ public class SneakerService {
     }
 
     //read all
-    public Sneaker[] findAll() {
+    public static Sneaker[] findAll() {
         // should return a basic array copy of the ArrayList
         Sneaker[] sneakerArray = new Sneaker[inventory.size()];
 
@@ -46,7 +52,7 @@ public class SneakerService {
     }
 
     //delete
-    public boolean delete(int id) {
+    public static boolean delete(int id) {
         // should remove the object with this id from the ArrayList if exits and return true.
         // Otherwise return false
         for (Sneaker sneaker : inventory) {
@@ -54,6 +60,22 @@ public class SneakerService {
                 inventory.remove(id);
                 return true;
             }
+        }
+        return false;
+    }
+
+    public static boolean update(int id, String name, String brand, String sport, double size, int quantity, float price) {
+        for (Sneaker sneaker : inventory) {
+            if (sneaker.getId() == id) {
+                sneaker.setName(name);
+                sneaker.setBrand(brand);
+                sneaker.setSport(sport);
+                sneaker.setSize(size);
+                sneaker.setQty(quantity);
+                sneaker.setPrice(price);
+                return true;
+            }
+
         }
         return false;
     }
