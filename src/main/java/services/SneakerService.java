@@ -1,15 +1,15 @@
 package services;
 
-import io.Console;
 import models.Sneaker;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SneakerService {
-    private static int nextId = 1;  // (1)
+    public static int nextId = 1;  // (1)
 
-    private static final List<Sneaker> inventory = new ArrayList<>();
+    public static final List<Sneaker> inventory = new ArrayList<>();
 
     public static Sneaker create(String name, String brand, String sport, double size, int quantity, float price) {
 
@@ -26,6 +26,7 @@ public class SneakerService {
         inventory.add(createdSneaker);
 
         nextId++;
+
         // (4)
         return createdSneaker;
     }
@@ -43,7 +44,6 @@ public class SneakerService {
 
     //read all
     public static Sneaker[] findAll() {
-        // should return a basic array copy of the ArrayList
         Sneaker[] sneakerArray = new Sneaker[inventory.size()];
 
         sneakerArray = inventory.toArray(sneakerArray);
@@ -79,4 +79,5 @@ public class SneakerService {
         }
         return false;
     }
+
 }

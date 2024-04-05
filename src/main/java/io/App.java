@@ -2,7 +2,12 @@ package io;
 
 import models.Sneaker;
 import services.SneakerService;
+import utils.CSVUtils;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Writer;
 import java.lang.invoke.StringConcatFactory;
 
 
@@ -14,6 +19,36 @@ public class App {
         Console.printWelcome();
         application.init();
 
+    }
+
+    public void loadData(){
+        // (1)
+        String csvFile = "/Users/michael/Desktop/Projects/Product-Inventory-Lab/src/main/resources/Sneaker.csv";
+        String line = "";
+        String csvSplitBy = ",";
+
+        // (2)
+        try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
+            SneakerService.nextId = Integer.parseInt(br.readLine());  // (3)
+
+            while ((line = br.readLine()) != null) {
+                // split line with comma
+                String[] sneakerData = line.split(csvSplitBy);
+
+                // (4)
+                int id = Integer.parseInt(sneakerData[0]);
+                String name = sneakerData[1];
+                String brand = sneakerData[2];
+                String sport = sneakerData[3];
+                int qty = Integer.parseInt(sneakerData[4]);
+                float price = Float.parseFloat(sneakerData[5]);
+
+                // (5)
+                SneakerService.inventory.add(new Sneaker(id, name, brand, sport, qty, price));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void init() {
