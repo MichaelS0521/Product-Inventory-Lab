@@ -1,6 +1,7 @@
 package services;
 
 import models.Sneaker;
+import utils.CSVUtils;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -24,6 +25,13 @@ public class SneakerService {
 
         // (3)
         inventory.add(createdSneaker);
+
+        try {
+            CSVUtils.writeList();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
 
         nextId++;
 

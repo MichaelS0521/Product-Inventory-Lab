@@ -13,10 +13,11 @@ import java.lang.invoke.StringConcatFactory;
 
 public class App {
 
-    public static void main(String... args) {
+    public static void main(String... args) throws IOException {
 
         App application = new App();
         Console.printWelcome();
+        //application.loadData();
         application.init();
 
     }
@@ -47,6 +48,7 @@ public class App {
                 SneakerService.inventory.add(new Sneaker(id, name, brand, sport, qty, price));
             }
         } catch (IOException e) {
+            System.out.println("Cant find anything in the file.");
             e.printStackTrace();
         }
     }
