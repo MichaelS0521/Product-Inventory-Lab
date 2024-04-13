@@ -51,7 +51,7 @@ public class Reel {
         this.gearRatio = gearRatio;
     }
 
-    public double getSize() {
+    public int getSize() {
         return size;
     }
 
@@ -78,9 +78,6 @@ public class Reel {
     @Override
     public String toString() {
         return "\n********************\n" +
-                if (qty == ) {
-
-                } +
                 "ID: [" + id +
                 "]\nName: " + name +
                 "\nBrand: " + brand +

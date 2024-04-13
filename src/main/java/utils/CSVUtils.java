@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static services.ReelService.reelId;
 import static services.ReelService.reelInventory;
+import static services.RodService.rodId;
 import static services.RodService.rodInventory;
 import static services.SneakerService.inventory;
 import static services.SneakerService.nextId;
@@ -64,7 +66,7 @@ public class CSVUtils {
         String csvFile = "/Users/michael/Desktop/Projects/Product-Inventory-Lab/src/main/resources/Rod.csv";
         FileWriter writer = new FileWriter(csvFile); //(1)
 
-        CSVUtils.writeLine(writer, new ArrayList<>(Arrays.asList(String.valueOf(nextId))));  // (2)
+        CSVUtils.writeLine(writer, new ArrayList<>(Arrays.asList(String.valueOf(rodId))));  // (2)
 
         for (Rod rod : rodInventory) {
             List<String> list = new ArrayList<>(); // (3)
@@ -89,7 +91,7 @@ public class CSVUtils {
         String csvFile = "/Users/michael/Desktop/Projects/Product-Inventory-Lab/src/main/resources/Reel.csv";
         FileWriter writer = new FileWriter(csvFile); //(1)
 
-        CSVUtils.writeLine(writer, new ArrayList<>(Arrays.asList(String.valueOf(nextId))));  // (2)
+        CSVUtils.writeLine(writer, new ArrayList<>(Arrays.asList(String.valueOf(reelId))));  // (2)
 
         for (Reel reel : reelInventory) {
             List<String> list = new ArrayList<>(); // (3)
