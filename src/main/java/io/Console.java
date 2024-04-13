@@ -1,6 +1,10 @@
 package io;
 
+import models.Reel;
+import models.Rod;
 import models.Sneaker;
+import services.ReelService;
+import services.RodService;
 import services.SneakerService;
 
 import java.util.Scanner;
@@ -13,7 +17,7 @@ public class Console {
                 "**************************************************\n" +
                 "***           Welcome and Bienvenue            ***\n" +
                 "***                    to                      ***\n" +
-                "***          ZipCo Inventory Manager           ***\n" +
+                "***        ZipCode Inventory Manager           ***\n" +
                 "**************************************************\n");
     }
 
@@ -24,7 +28,7 @@ public class Console {
     public static String getStringInput(String prompt) {
         println(prompt);
 
-        return scan.next();
+        return scan.nextLine();
     }
 
     public static int getIntInput(String prompt) {
@@ -59,6 +63,28 @@ public class Console {
         float sneakerPrice = getFloatInput("Price:");
 
         return SneakerService.create(sneakerName, sneakerBrand, sneakerSport, sneakerSize, sneakerQty,sneakerPrice);
+    }
+
+    public static Rod createRodInput() {
+        String rodName = getStringInput("Name:");
+        String rodBrand = getStringInput("Brand:");
+        String rodType = getStringInput("RodType {Fresh/Salt/Fly}:");
+        double rodSize = getDoubleInput("Size:");
+        int rodQty = getIntInput("Qty:");
+        float rodPrice = getFloatInput("Price:");
+
+        return RodService.create(rodName, rodBrand, rodType, rodSize, rodQty, rodPrice);
+    }
+
+    public static Reel createReelInput() {
+        String reelName = getStringInput("Name:");
+        String reelBrand = getStringInput("Brand:");
+        String reelGearRatio = getStringInput("Gear Ratio {5.2:1, 6.2:1} :");
+        int reelSize = getIntInput("Size:");
+        int reelQty = getIntInput("Qty:");
+        float reelPrice = getFloatInput("Price:");
+
+        return ReelService.create(reelName, reelBrand, reelGearRatio, reelSize, reelQty, reelPrice);
     }
 
 }

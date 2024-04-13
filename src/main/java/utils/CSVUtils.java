@@ -1,13 +1,16 @@
 package utils;
 
+import models.Reel;
+import models.Rod;
 import models.Sneaker;
-import services.SneakerService;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static services.ReelService.reelInventory;
+import static services.RodService.rodInventory;
 import static services.SneakerService.inventory;
 import static services.SneakerService.nextId;
 
@@ -35,7 +38,7 @@ public class CSVUtils {
 
     public static void writeList() throws IOException {
         String csvFile = "/Users/michael/Desktop/Projects/Product-Inventory-Lab/src/main/resources/Sneaker.csv";
-        FileWriter writer = new FileWriter(csvFile, true); //(1)
+        FileWriter writer = new FileWriter(csvFile); //(1)
 
         CSVUtils.writeLine(writer, new ArrayList<>(Arrays.asList(String.valueOf(nextId))));  // (2)
 
@@ -57,37 +60,54 @@ public class CSVUtils {
 
     }
 
-    public void loadData(){
-        // (1)
-        String csvFile = "/Users/michael/Desktop/Projects/Product-Inventory-Lab/src/main/resources/Sneaker.csv";
-        String line = "";
-        String csvSplitBy = ",";
+    public static void writeRodList() throws IOException {
+        String csvFile = "/Users/michael/Desktop/Projects/Product-Inventory-Lab/src/main/resources/Rod.csv";
+        FileWriter writer = new FileWriter(csvFile); //(1)
 
-        // (2)
-        try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
-            if (br.readLine() != null) {
-                SneakerService.nextId = Integer.parseInt(br.readLine());  // (3)
+        CSVUtils.writeLine(writer, new ArrayList<>(Arrays.asList(String.valueOf(nextId))));  // (2)
 
-                while ((line = br.readLine()) != null) {
-                    // split line with comma
-                    String[] sneakerData = line.split(csvSplitBy);
+        for (Rod rod : rodInventory) {
+            List<String> list = new ArrayList<>(); // (3)
+            list.add(String.valueOf(rod.getId()));
+            list.add(rod.getName());
+            list.add(rod.getBrand());
+            list.add(rod.getRodType());
+            list.add(String.valueOf(rod.getSize()));
+            list.add(String.valueOf(rod.getQty()));
+            list.add(String.valueOf(rod.getPrice()));
 
-                    // (4)
-                    int id = Integer.parseInt(sneakerData[0]);
-                    String name = sneakerData[1];
-                    String brand = sneakerData[2];
-                    String sport = sneakerData[3];
-                    int qty = Integer.parseInt(sneakerData[4]);
-                    float price = Float.parseFloat(sneakerData[5]);
+            CSVUtils.writeLine(writer, list);  // (4)
+        }
 
-                    // (5)
-                    SneakerService.inventory.add(new Sneaker(id, name, brand, sport, qty, price));
-                }
-            }
-            } catch(IOException e){
-                System.out.println("Cant find anything in the file.");
-                e.printStackTrace();
-            }
+// (5)
+        writer.flush();
+        writer.close();
+
+    }
+
+    public static void writeReelList() throws IOException {
+        String csvFile = "/Users/michael/Desktop/Projects/Product-Inventory-Lab/src/main/resources/Reel.csv";
+        FileWriter writer = new FileWriter(csvFile); //(1)
+
+        CSVUtils.writeLine(writer, new ArrayList<>(Arrays.asList(String.valueOf(nextId))));  // (2)
+
+        for (Reel reel : reelInventory) {
+            List<String> list = new ArrayList<>(); // (3)
+            list.add(String.valueOf(reel.getId()));
+            list.add(reel.getName());
+            list.add(reel.getBrand());
+            list.add(reel.getGearRatio());
+            list.add(String.valueOf(reel.getSize()));
+            list.add(String.valueOf(reel.getQty()));
+            list.add(String.valueOf(reel.getPrice()));
+
+            CSVUtils.writeLine(writer, list);  // (4)
+        }
+
+// (5)
+        writer.flush();
+        writer.close();
+
     }
 
 }

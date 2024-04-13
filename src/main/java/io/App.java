@@ -17,7 +17,7 @@ public class App {
 
         App application = new App();
         Console.printWelcome();
-        //application.loadData();
+        application.loadData();
         application.init();
 
     }
@@ -53,9 +53,9 @@ public class App {
         }
     }
 
-    private void init() {
+    private void init() throws IOException {
         while (true) {
-            String userInput = Console.getStringInput("Input command:\n[-create] [-update] [-find] [-inv] [-remove] [-stop]").toLowerCase();
+            String userInput = Console.getStringInput("Input command:\n[-create] [-update] [-find] [-inv] [-remove] [-save] [-stop]").toLowerCase();
             if (userInput.equals("-create")) {
                 Console.print("You picked Creating a Sneaker, Please input the following:");
                 Console.createSneakerInput();
@@ -97,7 +97,10 @@ public class App {
             } else if (userInput.equals("-remove")) {
                 int sneakerId = Console.getIntInput("You picked remove a Sneaker, Please enter an Id:");
                 SneakerService.delete(sneakerId);
-            } else if (userInput.equals("-stop")) {
+            } else if (userInput.equals("-save")) {
+                CSVUtils.writeList();
+            }
+            else if (userInput.equals("-stop")) {
                 Console.print("You have ended the program, Goodbye!");
                 break;
             }

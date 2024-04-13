@@ -14,26 +14,18 @@ public class SneakerService {
 
     public static Sneaker create(String name, String brand, String sport, double size, int quantity, float price) {
 
-        for (Sneaker exsistingSneaker : inventory) {
-            if (exsistingSneaker.getId() == nextId) {
-                nextId++;
-            }
-        }
+//        for (Sneaker exsistingSneaker : inventory) {
+//            if (exsistingSneaker.getId() == nextId) {
+//                nextId++;
+//            }
+//        }
 
         // (2)
-        Sneaker createdSneaker = new Sneaker(nextId, name, brand, sport, size, quantity, price);
+        Sneaker createdSneaker = new Sneaker(nextId++, name, brand, sport, size, quantity, price);
 
         // (3)
         inventory.add(createdSneaker);
-
-        try {
-            CSVUtils.writeList();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-
-        nextId++;
+//        nextId++;
 
         // (4)
         return createdSneaker;
