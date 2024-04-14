@@ -173,7 +173,7 @@ public class RodApp {
                     }
                     break;
                 case "-inv":
-                    String invInput = Console.getStringInput("You picked inventory, Please input the following:\n [-rod] [-reel]").toLowerCase();
+                    String invInput = Console.getStringInput("You picked inventory, Please input the following:\n [-rod] [-reel] [-all]").toLowerCase();
                     switch (invInput) {
                         case "-rod":
                             Console.print("You picked Rod Inventory:");
@@ -187,6 +187,21 @@ public class RodApp {
                             Console.print("You picked Reel Inventory:");
                             Reel[] allReels = ReelService.findAll();
                             for (Reel reel : allReels) {
+                                Console.print(reel.toString());
+                            }
+                            ReelService.findAll();
+                            break;
+                        case "-all":
+                            Console.println("\nYou picked Find All Inventory:\n");
+                            Console.println("-=-=-=-= RODS =-=-=-=-");
+                            Rod[] Rods = RodService.findAll();
+                            for (Rod rod : Rods) {
+                                Console.print(rod.toString());
+                            }
+                            RodService.findAll();
+                            Console.println("-=-=-=-= REELS =-=-=-=-");
+                            Reel[] Reels = ReelService.findAll();
+                            for (Reel reel : Reels) {
                                 Console.print(reel.toString());
                             }
                             ReelService.findAll();
