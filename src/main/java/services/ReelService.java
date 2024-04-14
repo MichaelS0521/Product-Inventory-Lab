@@ -5,6 +5,7 @@ import models.Rod;
 
 import java.rmi.server.RemoteRef;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class ReelService {
@@ -42,14 +43,20 @@ public class ReelService {
     public static boolean delete(int id) {
         // should remove the object with this id from the ArrayList if exits and return true.
         // Otherwise return false
-        for (Reel reel : reelInventory) {
-            if (reel.getId() == id) {
-                reelInventory.remove(id);
-                return true;
+        boolean found = false;
+        Iterator<Reel> iterator = reelInventory.iterator();
+        while (iterator.hasNext()) {
+        Reel reel = iterator.next();
+            if (id == reel.getId()) {
+                iterator.remove();
+                found = true;
+            } else if (reel.getId() > id) {
+                reel.decrementId();
             }
         }
-        return false;
+        return found;
     }
+
 
     public static boolean update(int id, String name, String brand, String gearRatio, String reelStyle, int size, int qty, float price) {
         for (Reel reel : reelInventory) {

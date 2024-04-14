@@ -8,14 +8,7 @@ import java.util.List;
 public class RodService {
     public static int rodId = 1;
     public static final List<Rod> rodInventory = new ArrayList<>();
-
-    //    "ID: [" + id +
-//            "]\nName: " + name +
-//            "\nBrand: " + brand +
-//            "\nRod Type: " + rodType +
-//            "\nSize: " + size +
-//            "\nQuantity: " + qty +
-//            "\nPrice: $" + price +
+    
     public static Rod create(String name, String brand, String rodType, String size, int qty, float price) {
 
         Rod fishingRod = new Rod(rodId++, name, brand, rodType, size, qty, price);
@@ -51,6 +44,8 @@ public class RodService {
             if (rod.getId() == id) {
                 rodInventory.remove(id);
                 return true;
+            } else if (rod.getId() > id) {
+                rod.decrementId();
             }
         }
         return false;

@@ -75,6 +75,10 @@ public class Rod {
         this.price = price;
     }
 
+    public void decrementId() {
+        id--;
+    }
+
     @Override
     public String toString() {
         return "\n********************\n" +

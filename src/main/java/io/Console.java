@@ -18,6 +18,15 @@ public class Console {
                 "**************************************************\n");
     }
 
+    public static void printFishingWelcome(){
+        System.out.println("\n" +
+                "**************************************************\n" +
+                "***           Welcome and Bienvenue            ***\n" +
+                "***                    to                      ***\n" +
+                "***       Tackle Shop Inventory Manager        ***\n" +
+                "**************************************************\n");
+    }
+
     public static void println(String val) {
         print(val);
     }

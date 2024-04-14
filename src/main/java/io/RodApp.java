@@ -15,7 +15,7 @@ public class RodApp {
     public static void main(String... args) throws IOException {
 
         RodApp application = new RodApp();
-        Console.printWelcome();
+        Console.printFishingWelcome();
         application.loadData();
         application.rodMenu();
 
