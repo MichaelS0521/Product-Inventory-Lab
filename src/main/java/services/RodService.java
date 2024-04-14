@@ -16,7 +16,7 @@ public class RodService {
 //            "\nSize: " + size +
 //            "\nQuantity: " + qty +
 //            "\nPrice: $" + price +
-    public static Rod create(String name, String brand, String rodType, double size, int qty, float price) {
+    public static Rod create(String name, String brand, String rodType, String size, int qty, float price) {
 
         Rod fishingRod = new Rod(rodId++, name, brand, rodType, size, qty, price);
 
@@ -56,7 +56,7 @@ public class RodService {
         return false;
     }
 
-    public static boolean update(int id, String name, String brand, String rodType, double size, int qty, float price) {
+    public static boolean update(int id, String name, String brand, String rodType, String size, int qty, float price) {
         for (Rod rod : rodInventory) {
             if (rod.getId() == id) {
                 rod.setName(name);

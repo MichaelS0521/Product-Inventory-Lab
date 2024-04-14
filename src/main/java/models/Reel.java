@@ -5,18 +5,28 @@ public class Reel {
     private String name;
     private String brand;
     private String gearRatio;
+    private String reelStyle;
     private int size;
     private int qty;
     private float price;
 
-    public Reel(int id, String name, String brand, String gearRatio, int size, int qty, float price) {
+    public Reel(int id, String name, String brand, String gearRatio, String reelStyle, int size, int qty, float price) {
         this.id = id;
         this.name = name;
         this.brand = brand;
         this.gearRatio = gearRatio;
+        this.reelStyle = reelStyle;
         this.size = size;
         this.qty = qty;
         this.price = price;
+    }
+
+    public String getReelStyle() {
+        return reelStyle;
+    }
+
+    public void setReelStyle(String reelStyle) {
+        this.reelStyle = reelStyle;
     }
 
     public int getId() {
@@ -82,6 +92,7 @@ public class Reel {
                 "]\nName: " + name +
                 "\nBrand: " + brand +
                 "\nGear Ratio: " + gearRatio +
+                "\nReel Style: " + reelStyle +
                 "\nSize: " + size +
                 "\nQuantity: " + qty +
                 "\nPrice: $" + price +

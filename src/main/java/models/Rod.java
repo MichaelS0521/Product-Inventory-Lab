@@ -5,11 +5,11 @@ public class Rod {
     private String name;
     private String brand;
     private String rodType;
-    private double size;
+    private String size;
     private int qty;
     private float price;
 
-    public Rod(int id, String name, String brand, String rodType, double size, int qty, float price) {
+    public Rod(int id, String name, String brand, String rodType, String size, int qty, float price) {
         this.id = id;
         this.name = name;
         this.brand = brand;
@@ -35,7 +35,7 @@ public class Rod {
         return rodType;
     }
 
-    public double getSize() {
+    public String getSize() {
         return size;
     }
 
@@ -63,7 +63,7 @@ public class Rod {
         this.rodType = rodType;
     }
 
-    public void setSize(double size) {
+    public void setSize(String size) {
         this.size = size;
     }
 

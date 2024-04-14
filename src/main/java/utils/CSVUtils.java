@@ -74,7 +74,7 @@ public class CSVUtils {
             list.add(rod.getName());
             list.add(rod.getBrand());
             list.add(rod.getRodType());
-            list.add(String.valueOf(rod.getSize()));
+            list.add(rod.getSize());
             list.add(String.valueOf(rod.getQty()));
             list.add(String.valueOf(rod.getPrice()));
 
@@ -99,6 +99,7 @@ public class CSVUtils {
             list.add(reel.getName());
             list.add(reel.getBrand());
             list.add(reel.getGearRatio());
+            list.add(reel.getReelStyle());
             list.add(String.valueOf(reel.getSize()));
             list.add(String.valueOf(reel.getQty()));
             list.add(String.valueOf(reel.getPrice()));

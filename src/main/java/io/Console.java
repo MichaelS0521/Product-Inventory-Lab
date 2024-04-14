@@ -1,8 +1,5 @@
 package io;
 
-import models.Reel;
-import models.Rod;
-import models.Sneaker;
 import services.ReelService;
 import services.RodService;
 import services.SneakerService;
@@ -28,7 +25,7 @@ public class Console {
     public static String getStringInput(String prompt) {
         println(prompt);
 
-        return scan.nextLine();
+        return scan.next();
     }
 
     public static int getIntInput(String prompt) {
@@ -54,7 +51,7 @@ public class Console {
         System.out.println(output);
     }
 
-    public static Sneaker createSneakerInput() {
+    public static void createSneakerInput() {
         String sneakerName = getStringInput("Name:");
         String sneakerBrand = getStringInput("Brand:");
         String sneakerSport = getStringInput("Sport:");
@@ -62,29 +59,30 @@ public class Console {
         int sneakerQty = getIntInput("Qty:");
         float sneakerPrice = getFloatInput("Price:");
 
-        return SneakerService.create(sneakerName, sneakerBrand, sneakerSport, sneakerSize, sneakerQty,sneakerPrice);
+        SneakerService.create(sneakerName, sneakerBrand, sneakerSport, sneakerSize, sneakerQty, sneakerPrice);
     }
 
-    public static Rod createRodInput() {
+    public static void createRodInput() {
         String rodName = getStringInput("Name:");
         String rodBrand = getStringInput("Brand:");
         String rodType = getStringInput("RodType {Fresh/Salt/Fly}:");
-        double rodSize = getDoubleInput("Size:");
+        String rodSize = getStringInput("Size:");
         int rodQty = getIntInput("Qty:");
         float rodPrice = getFloatInput("Price:");
 
-        return RodService.create(rodName, rodBrand, rodType, rodSize, rodQty, rodPrice);
+        RodService.create(rodName, rodBrand, rodType, rodSize, rodQty, rodPrice);
     }
 
-    public static Reel createReelInput() {
+    public static void createReelInput() {
         String reelName = getStringInput("Name:");
         String reelBrand = getStringInput("Brand:");
-        String reelGearRatio = getStringInput("Gear Ratio {5.2:1, 6.2:1} :");
-        int reelSize = getIntInput("Size:");
+        String reelGearRatio = getStringInput("Gear Ratio {5.2:1, 6.2:1, 7.2:1, 8.1:1}:");
+        String reelStyle = getStringInput("Reel Style {BaitCaster, SpinningReel, FlyReel}:");
+        int reelSize = getIntInput("Size {500, 1000, 1500, etc...:");
         int reelQty = getIntInput("Qty:");
-        float reelPrice = getFloatInput("Price:");
+        float reelPrice = getFloatInput("Price: $");
 
-        return ReelService.create(reelName, reelBrand, reelGearRatio, reelSize, reelQty, reelPrice);
+        ReelService.create(reelName, reelBrand, reelGearRatio, reelStyle, reelSize, reelQty, reelPrice);
     }
 
 }

@@ -40,7 +40,7 @@ public class RodApp {
                 String name = rodData[1];
                 String brand = rodData[2];
                 String rodType = rodData[3];
-                int rodSize = Integer.parseInt(rodData[4]);
+                String rodSize = rodData[4];
                 int qty = Integer.parseInt(rodData[5]);
                 float price = Float.parseFloat(rodData[6]);
 
@@ -69,12 +69,13 @@ public class RodApp {
                 String name = reelData[1];
                 String brand = reelData[2];
                 String gearRatio = reelData[3];
-                int reelSize = Integer.parseInt(reelData[4]);
-                int qty = Integer.parseInt(reelData[5]);
-                float price = Float.parseFloat(reelData[6]);
+                String reelType = reelData[4];
+                int reelSize = Integer.parseInt(reelData[5]);
+                int qty = Integer.parseInt(reelData[6]);
+                float price = Float.parseFloat(reelData[7]);
 
                 // (5)
-                ReelService.reelInventory.add(new Reel(id, name, brand, gearRatio, reelSize, qty, price));
+                ReelService.reelInventory.add(new Reel(id, name, brand, gearRatio, reelType, reelSize, qty, price));
             }
         } catch (IOException e) {
             System.out.println("Cant find anything in the file.");
@@ -83,125 +84,137 @@ public class RodApp {
     }
 
     private void rodMenu() throws IOException {
+        label:
         while (true) {
             String userInput = Console.getStringInput("Input command:\n[-create] [-update] [-find] [-inv] [-remove] [-save] [-stop]").toLowerCase();
-            if (userInput.equals("-create")) {
-                String createdInput = Console.getStringInput("You picked Create, Please input the following:\n [-rod] [-reel]").toLowerCase();
-                switch (createdInput) {
-                    case "-rod":
-                        Console.print("You picked Creating a Rod, Please input the following:");
-                        Console.createRodInput();
-                        break;
-                    case "-reel":
-                        Console.print("You picked Creating a Reel, Please input the following:");
-                        Console.createReelInput();
-                        break;
-                }
-            } else if (userInput.equals("-update")) {
-                String createdInput = Console.getStringInput("You picked Update, Please input the following:\n [-rod] [-reel]").toLowerCase();
-                switch (createdInput) {
-                    case "-rod":
-                        int rodId = Console.getIntInput("You picked update a Rod, Please enter an Id:");
-                        Rod fishingRod = RodService.findRod(rodId);
-                        if (fishingRod != null) {
-                            String name = Console.getStringInput("Enter new name:");
-                            String brand = Console.getStringInput("Enter new brand:");
-                            String rodType = Console.getStringInput("Enter new Rod Type {Fresh/Salt/Fly}:");
-                            double size = Console.getDoubleInput("Enter new size:");
-                            int quantity = Console.getIntInput("Enter new quantity:");
-                            float price = Console.getFloatInput("Enter new price:");
+            switch (userInput) {
+                case "-create":
+                    String createdInput = Console.getStringInput("You picked Create, Please input the following:\n [-rod] [-reel]").toLowerCase();
+                    switch (createdInput) {
+                        case "-rod":
+                            Console.print("You picked Creating a Rod, Please input the following:");
+                            Console.createRodInput();
+                            break;
+                        case "-reel":
+                            Console.print("You picked Creating a Reel, Please input the following:");
+                            Console.createReelInput();
+                            break;
+                    }
+                    break;
+                case "-update":
+                    String updatedInput = Console.getStringInput("You picked Update, Please input the following:\n [-rod] [-reel]").toLowerCase();
+                    switch (updatedInput) {
+                        case "-rod":
+                            int rodId = Console.getIntInput("You picked update a Rod, Please enter an Id:");
+                            Rod fishingRod = RodService.findRod(rodId);
+                            if (fishingRod != null) {
+                                String name = Console.getStringInput("Enter new name:");
+                                String brand = Console.getStringInput("Enter new brand:");
+                                String rodType = Console.getStringInput("Enter new Rod Type {Fresh/Salt/Fly}:");
+                                String size = Console.getStringInput("Enter new size:");
+                                int quantity = Console.getIntInput("Enter new quantity:");
+                                float price = Console.getFloatInput("Enter new price:");
 
-                            boolean updated = RodService.update(rodId, name, brand, rodType, size, quantity, price);
-                            if (updated) {
-                                Console.print("Reel updated successfully.");
+                                boolean updated = RodService.update(rodId, name, brand, rodType, size, quantity, price);
+                                if (updated) {
+                                    Console.print("Rod updated successfully.");
+                                } else {
+                                    Console.print("Failed to update Rod. Rod not found.");
+                                }
                             } else {
-                                Console.print("Failed to update Rod. Rod not found.");
+                                Console.print("Rod not found with ID: " + rodId);
                             }
-                        } else {
-                            Console.print("Rod not found with ID: " + rodId);
-                        }
-                    case "-reel":
-                        int reelId = Console.getIntInput("You picked update a Reel, Please enter an Id:");
-                        Reel reel = ReelService.findReel(reelId);
-                        if (reel != null) {
-                            String name = Console.getStringInput("Enter new name:");
-                            String brand = Console.getStringInput("Enter new brand:");
-                            String gearRatio = Console.getStringInput("Enter new Gear Ratio:");
-                            int size = Console.getIntInput("Enter new size:");
-                            int quantity = Console.getIntInput("Enter new quantity:");
-                            float price = Console.getFloatInput("Enter new price:");
+                            break;
+                        case "-reel":
+                            int reelId = Console.getIntInput("You picked update a Reel, Please enter an Id:");
+                            Reel reel = ReelService.findReel(reelId);
+                            if (reel != null) {
+                                String name = Console.getStringInput("Enter new name:");
+                                String brand = Console.getStringInput("Enter new brand:");
+                                String gearRatio = Console.getStringInput("Enter new Gear Ratio:");
+                                String reelType = Console.getStringInput("Enter new Reel Type:");
+                                int size = Console.getIntInput("Enter new size:");
+                                int quantity = Console.getIntInput("Enter new quantity:");
+                                float price = Console.getFloatInput("Enter new price:");
 
-                            boolean updated = ReelService.update(reelId, name, brand, gearRatio, size, quantity, price);
-                            if (updated) {
-                                Console.print("Reel updated successfully.");
+                                boolean updated = ReelService.update(reelId, name, brand, gearRatio, reelType, size, quantity, price);
+                                if (updated) {
+                                    Console.print("Reel updated successfully.");
+                                } else {
+                                    Console.print("Failed to update Reel. Reel not found.");
+                                }
                             } else {
-                                Console.print("Failed to update Reel. Reel not found.");
+                                Console.print("Reel not found with ID: " + reelId);
                             }
-                        } else {
-                            Console.print("Reel not found with ID: " + reelId);
-                        }
-                }
-            } else if (userInput.equals("-find")) {
-                String createdInput = Console.getStringInput("You picked find, Please input the following:\n [-rod] [-reel]").toLowerCase();
-                switch (createdInput) {
-                    case "-rod":
-                        int rodId = Console.getIntInput("You picked find a Rod, Please enter an Id:");
-                        Rod rod = RodService.findRod(rodId);
-                        if (rod != null) {
-                            Console.print("Rod found:\n" + rod.toString());
-                        } else {
-                            Console.print("Rod not found with ID: " + rodId);
-                        }
-                        break;
-                    case "-reel":
-                        int reelId = Console.getIntInput("You picked find a Reel, Please enter an Id:");
-                        Reel reel = ReelService.findReel(reelId);
-                        if (reel != null) {
-                            Console.print("Reel found:\n" + reel.toString());
-                        } else {
-                            Console.print("Reel not found with ID: " + reelId);
-                        }
-                        break;
-                }
-            } else if (userInput.equals("-inv")) {
-                String createdInput = Console.getStringInput("You picked inventory, Please input the following:\n [-rod] [-reel]").toLowerCase();
-                switch (createdInput) {
-                    case "-rod":
-                        Console.print("You picked Rod Inventory:");
-                        Rod[] allRods = RodService.findAll();
-                        for (Rod rod : allRods) {
-                            Console.print(rod.toString());
-                        }
-                        RodService.findAll();
-                        break;
-                    case "-reel":
-                        Console.print("You picked Reel Inventory:");
-                        Reel[] allReels = ReelService.findAll();
-                        for (Reel reel : allReels) {
-                            Console.print(reel.toString());
-                        }
-                        ReelService.findAll();
-                        break;
-                }
-            } else if (userInput.equals("-remove")) {
-                String createdInput = Console.getStringInput("You picked remove, Please input the following:\n [-rod] [-reel]").toLowerCase();
-                switch (createdInput) {
-                    case "-rod":
-                        int rodId = Console.getIntInput("You picked remove a Rod, Please enter an Id:");
-                        RodService.delete(rodId);
-                        break;
-                    case "-reel":
-                        int reelID = Console.getIntInput("You picked remove a Reel, Please enter an Id:");
-                        ReelService.delete(reelID);
-                        break;
-                }
-            } else if (userInput.equals("-save")) {
-                CSVUtils.writeRodList();
-                CSVUtils.writeReelList();
-            }
-            else if (userInput.equals("-stop")) {
-                Console.print("You have ended the program, Goodbye!");
-                break;
+                            break;
+                    }
+                    break;
+                case "-find":
+                    String findInput = Console.getStringInput("You picked find, Please input the following:\n [-rod] [-reel]").toLowerCase();
+                    switch (findInput) {
+                        case "-rod":
+                            int rodId = Console.getIntInput("You picked find a Rod, Please enter an Id:");
+                            Rod rod = RodService.findRod(rodId);
+                            if (rod != null) {
+                                Console.print("Rod found:\n" + rod.toString());
+                            } else {
+                                Console.print("Rod not found with ID: " + rodId);
+                            }
+                            break;
+                        case "-reel":
+                            int reelId = Console.getIntInput("You picked find a Reel, Please enter an Id:");
+                            Reel reel = ReelService.findReel(reelId);
+                            if (reel != null) {
+                                Console.print("Reel found:\n" + reel.toString());
+                            } else {
+                                Console.print("Reel not found with ID: " + reelId);
+                            }
+                            break;
+                    }
+                    break;
+                case "-inv":
+                    String invInput = Console.getStringInput("You picked inventory, Please input the following:\n [-rod] [-reel]").toLowerCase();
+                    switch (invInput) {
+                        case "-rod":
+                            Console.print("You picked Rod Inventory:");
+                            Rod[] allRods = RodService.findAll();
+                            for (Rod rod : allRods) {
+                                Console.print(rod.toString());
+                            }
+                            RodService.findAll();
+                            break;
+                        case "-reel":
+                            Console.print("You picked Reel Inventory:");
+                            Reel[] allReels = ReelService.findAll();
+                            for (Reel reel : allReels) {
+                                Console.print(reel.toString());
+                            }
+                            ReelService.findAll();
+                            break;
+                    }
+                    break;
+                case "-remove":
+                    String removeInput = Console.getStringInput("You picked remove, Please input the following:\n [-rod] [-reel]").toLowerCase();
+                    switch (removeInput) {
+                        case "-rod":
+                            int rodId = Console.getIntInput("You picked remove a Rod, Please enter an Id:");
+                            RodService.delete(rodId);
+                            break;
+                        case "-reel":
+                            int reelID = Console.getIntInput("You picked remove a Reel, Please enter an Id:");
+                            ReelService.delete(reelID);
+                            break;
+                    }
+                    break;
+                case "-save":
+                    CSVUtils.writeRodList();
+                    CSVUtils.writeReelList();
+                    break;
+                case "-stop":
+                    Console.print("You have ended the program, Goodbye!");
+                    return;
+                default:
+                    Console.print("Invalid command. Please try again.");
             }
         }
     }

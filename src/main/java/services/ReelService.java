@@ -11,9 +11,9 @@ public class ReelService {
     public static int reelId = 1;
     public static final List<Reel> reelInventory = new ArrayList<>();
 
-    public static Reel create(String name, String brand, String gearRatio, int size, int qty, float price) {
+    public static Reel create(String name, String brand, String gearRatio, String reelStyle, int size, int qty, float price) {
 
-        Reel createdReel = new Reel(reelId++, name, brand, gearRatio, size, qty, price);
+        Reel createdReel = new Reel(reelId++, name, brand, gearRatio, reelStyle, size, qty, price);
 
         reelInventory.add(createdReel);
 
@@ -51,12 +51,13 @@ public class ReelService {
         return false;
     }
 
-    public static boolean update(int id, String name, String brand, String gearRatio, int size, int qty, float price) {
+    public static boolean update(int id, String name, String brand, String gearRatio, String reelStyle, int size, int qty, float price) {
         for (Reel reel : reelInventory) {
             if (reel.getId() == id) {
                 reel.setName(name);
                 reel.setBrand(brand);
                 reel.setGearRatio(gearRatio);
+                reel.setReelStyle(reelStyle);
                 reel.setSize(size);
                 reel.setQty(qty);
                 reel.setPrice(price);
