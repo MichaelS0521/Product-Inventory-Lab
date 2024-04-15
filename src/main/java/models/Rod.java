@@ -1,5 +1,7 @@
 package models;
 
+import services.RodService;
+
 public class Rod {
     private int id;
     private String name;
@@ -82,13 +84,14 @@ public class Rod {
     @Override
     public String toString() {
         return "\n********************\n" +
-                "ID: [" + id +
-                "]\nName: " + name +
+                RodService.inStock(id) +
+                "\nID: [" + id + "]" +
+                "\nName: " + name +
                 "\nBrand: " + brand +
                 "\nRod Type: " + rodType +
                 "\nSize: " + size +
                 "\nQuantity: " + qty +
-                "\nPrice: $" + price +
+                "\nPrice: 💲" + price +
                 "\n********************\n";
     }
 }

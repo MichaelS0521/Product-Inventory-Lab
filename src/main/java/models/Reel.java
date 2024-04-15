@@ -1,5 +1,7 @@
 package models;
 
+import services.ReelService;
+
 public class Reel {
     private int id;
     private String name;
@@ -92,14 +94,15 @@ public class Reel {
     @Override
     public String toString() {
         return "\n********************\n" +
-                "ID: [" + id +
-                "]\nName: " + name +
+                ReelService.inStock(id) +
+                "\nID: [" + id + "]" +
+                "\nName: " + name +
                 "\nBrand: " + brand +
                 "\nGear Ratio: " + gearRatio +
                 "\nReel Style: " + reelStyle +
                 "\nSize: " + size +
                 "\nQuantity: " + qty +
-                "\nPrice: $" + price +
+                "\nPrice: 💲" + price +
                 "\n********************\n";
     }
 }

@@ -1,5 +1,6 @@
 package services;
 
+import io.Console;
 import models.Reel;
 import models.Rod;
 
@@ -73,5 +74,20 @@ public class ReelService {
 
         }
         return false;
+    }
+
+    public static String inStock(int reelId) {
+        for (Reel reel : reelInventory){
+            if (reel.getId() == reelId) {
+                if (reel.getQty() > 3) {
+                    return "[✅IN STOCK✅]";
+                } else if (reel.getQty() > 0 && reel.getQty() < 3) {
+                    return "[⚠️️LIMITED STOCK️⚠️️]";
+                }else {
+                    return"[❌OUT OF STOCK❌]";
+                }
+            }
+        }
+        return "[Item doesn't Exist]";
     }
 }

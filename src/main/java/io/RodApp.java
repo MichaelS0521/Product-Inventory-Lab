@@ -90,17 +90,19 @@ public class RodApp {
             switch (userInput) {
                 case "-create":
                     String createdInput = Console.getStringInput("You picked Create, Please input the following:\n [-rod] [-reel]").toLowerCase();
-                    switch (createdInput) {
-                        case "-rod":
-                            Console.print("You picked Creating a Rod, Please input the following:");
-                            Console.createRodInput();
-                            break;
-                        case "-reel":
-                            Console.print("You picked Creating a Reel, Please input the following:");
-                            Console.createReelInput();
-                            break;
-                    }
-                    break;
+                        switch (createdInput) {
+                            case "-rod":
+                                Console.print("You picked Creating a Rod, Please input the following:");
+                                Console.createRodInput();
+                                break;
+                            case "-reel":
+                                Console.print("You picked Creating a Reel, Please input the following:");
+                                Console.createReelInput();
+                                break;
+                            default:
+                                Console.print("Invalid command. Please try again.");
+                        }
+                        break;
                 case "-update":
                     String updatedInput = Console.getStringInput("You picked Update, Please input the following:\n [-rod] [-reel]").toLowerCase();
                     switch (updatedInput) {
@@ -131,8 +133,8 @@ public class RodApp {
                             if (reel != null) {
                                 String name = Console.getStringInput("Enter new name:");
                                 String brand = Console.getStringInput("Enter new brand:");
-                                String gearRatio = Console.getStringInput("Enter new Gear Ratio:");
-                                String reelType = Console.getStringInput("Enter new Reel Type:");
+                                String gearRatio = Console.getStringInput("Enter new Gear Ratio {5.2:1, 6.2:1, 7.2:1, 8.1:1}:");
+                                String reelType = Console.getStringInput("Enter new Reel Type {BaitCaster, SpinningReel, FlyReel}:");
                                 int size = Console.getIntInput("Enter new size:");
                                 int quantity = Console.getIntInput("Enter new quantity:");
                                 float price = Console.getFloatInput("Enter new price:");
@@ -147,6 +149,8 @@ public class RodApp {
                                 Console.print("Reel not found with ID: " + reelId);
                             }
                             break;
+                        default:
+                            Console.print("Invalid command. Please try again.");
                     }
                     break;
                 case "-find":
@@ -170,6 +174,8 @@ public class RodApp {
                                 Console.print("Reel not found with ID: " + reelId);
                             }
                             break;
+                        default:
+                            Console.print("Invalid command. Please try again.");
                     }
                     break;
                 case "-inv":
@@ -206,6 +212,8 @@ public class RodApp {
                             }
                             ReelService.findAll();
                             break;
+                        default:
+                            Console.print("Invalid command. Please try again.");
                     }
                     break;
                 case "-remove":
@@ -219,6 +227,8 @@ public class RodApp {
                             int reelID = Console.getIntInput("You picked remove a Reel, Please enter an Id:");
                             ReelService.delete(reelID);
                             break;
+                        default:
+                            Console.print("Invalid command. Please try again.");
                     }
                     break;
                 case "-save":

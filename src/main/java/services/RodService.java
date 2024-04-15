@@ -1,5 +1,6 @@
 package services;
 
+import models.Reel;
 import models.Rod;
 
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ import java.util.List;
 public class RodService {
     public static int rodId = 1;
     public static final List<Rod> rodInventory = new ArrayList<>();
-    
+
     public static Rod create(String name, String brand, String rodType, String size, int qty, float price) {
 
         Rod fishingRod = new Rod(rodId++, name, brand, rodType, size, qty, price);
@@ -65,5 +66,20 @@ public class RodService {
 
         }
         return false;
+    }
+
+    public static String inStock(int rodId) {
+        for (Rod rod : rodInventory){
+            if (rod.getId() == rodId) {
+                if (rod.getQty() > 3) {
+                    return "[IN STOCK]";
+                } else if (rod.getQty() > 0 && rod.getQty() < 3) {
+                    return "[LIMITED STOCK]";
+                }else {
+                    return"[OUT OF STOCK]";
+                }
+            }
+        }
+        return "[Item doesn't Exist]";
     }
 }
